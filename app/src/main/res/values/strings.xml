@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherHelper</string>
+
+    <string name="welcome_title">Weather helper</string>
+    <string name="choose_city">Choose your city:</string>
+    <string name="choose_button">Choose</string>
+</resources>
