@@ -4,15 +4,19 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProviders;
+
+import ru.soft.weatherhelper.modelView.CityWeatherViewModel;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    public static final String CITY_TAG = "CITY_TAG";
-    private long cityId;
+    public static final String CITY_TAG = "WeatherActivity.CITY_TAG";
+    private CityWeatherViewModel cityWeatherViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,15 @@ public class WeatherActivity extends AppCompatActivity {
             return insets;
         });
 
-        cityId = getIntent().getLongExtra(CITY_TAG, -1);
-        Log.i(WeatherActivity.class.getName(), String.valueOf(cityId));
+        cityWeatherViewModel = ViewModelProviders.of(this).get(CityWeatherViewModel.class);
+
         Log.i(WeatherActivity.class.getName(), String.valueOf(getIntent().getExtras()));
+        cityWeatherViewModel.selectCity(getIntent().getStringExtra(CITY_TAG));
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(CITY_TAG, cityWeatherViewModel.getCityWeather().city);
     }
 }

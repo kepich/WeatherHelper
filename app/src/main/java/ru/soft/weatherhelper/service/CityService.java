@@ -1,6 +1,8 @@
-package ru.soft.weatherhelper.model;
+package ru.soft.weatherhelper.service;
 
 import java.util.List;
+
+import ru.soft.weatherhelper.model.CityWeather;
 
 public class CityService {
     private static CityService singleton = null;
@@ -20,5 +22,9 @@ public class CityService {
 
     public List<String> getCities() {
         return dataModule.getCities();
+    }
+
+    public CityWeather getWeatherForCity(String city) {
+        return dataModule.getWeatherForCity(city);
     }
 }
